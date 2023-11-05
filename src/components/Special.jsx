@@ -32,7 +32,7 @@ const Special = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full">
+        <div className="flex flex-col items-stretch w-[33%] max-md:w-full">
           <div className="justify-center items-center bg-neutral-800 flex w-[361px] max-w-full grow flex-col mx-auto px-5 py-10 rounded-lg max-md:mt-12">
             <div className="justify-center items-center bg-violet-50 self-center flex w-14 max-w-full flex-col mt-3.5 p-4 rounded-2xl">
               <img
@@ -50,7 +50,7 @@ const Special = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-stretch w-[33%] ml-5 max-md:w-full">
+        <div className="flex flex-col items-stretch w-[33%] max-md:w-full">
           <div className="justify-center items-center bg-neutral-800 flex w-[361px] max-w-full grow flex-col mx-auto px-5 py-10 rounded-lg max-md:mt-12">
             <div className="justify-center items-center bg-violet-50 self-center flex w-14 max-w-full flex-col mt-3.5 p-4 rounded-2xl">
               <img
