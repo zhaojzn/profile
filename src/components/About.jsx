@@ -17,7 +17,7 @@ const About = () => {
         </div>
         <div className="text-gray-800 text-base leading-8 w-[538px] max-w-full mt-9 text-white">
           Hey there 👋, I'm Jason Zhao, a 18-year-old first year student aspiring to become a
-          <span className='text-indigo-400 font-bold '> Software Engineer</span>. Ever since I was little i've always been intriguited by the idea of creating something that can be used by millions of people around the world.
+          <span className='text-indigo-400 font-bold '> Software Engineer</span>. Ever since I was little i've always been intrigued by the idea of creating something that can be used by millions of people around the world.
         </div>
         <div className="items-start flex w-48 max-w-full justify-between gap-5 mt-12 max-md:justify-center">
           <a href="https://www.instagram.com/jason.zhaooo/">
