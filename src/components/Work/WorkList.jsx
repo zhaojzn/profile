@@ -28,7 +28,7 @@ const works = [
                     <div className="flex w-3/4 max-w-full items-start gap-5 mt-5 max-md:flex-wrap">
                         <div className="bg-zinc-300 self-center flex w-2.5 h-0.5 flex-col my-auto" />
                         <div className="text-zinc-500 text-base self-stretch grow  asis-auto max-md:max-w-full">
-                        Manage cash transactions accurately, handling payments from customers and providing change whennecessary.
+                        Manage cash transactions accurately, handling payments from customers and providing change when necessary.
                         </div>
                     </div>
             </>
