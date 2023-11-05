@@ -1,10 +1,10 @@
 import Headshot from '../assets/headshot.png'
-
+import resume from '../assets/resume.pdf'
 import React from 'react'
 
 const Status = () => {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center" id="contact">
       <div className="w-full max-w-[1024px]">
         <div className="mt-10 mb-16">
           <div className="rounded-lg border border-[#006868] bg-gradient-to-br from-[#003535] to-[#000000] p-5">
@@ -23,14 +23,14 @@ const Status = () => {
                 </p>
 
                 <div>
-                  <a href="mailto:zhao0kelvin@gmail.com" className="mr-3">
+                  <a href="mailto:jasonnope123@gmail.com" className="mr-3">
                     <button className="mt-3 rounded-full border border-[#006868] bg-[#006868] bg-opacity-0 py-1 px-4 font-medium text-white transition-all duration-100 hover:bg-opacity-100 active:bg-opacity-70">
                       Email
                     </button>
                   </a>
 
                   <a
-                    href="https://www.linkedin.com/in/kel-z/"
+                    href="https://www.linkedin.com/in/jason-zhao-bab03b187/"
                     target="_blank"
                     rel="noreferrer"
                     className="mr-3"
@@ -41,7 +41,7 @@ const Status = () => {
                   </a>
 
                   <a
-                    href="https://github.com/kel-z"
+                    href="https://github.com/zhaojzn"
                     target="_blank"
                     rel="noreferrer"
                     className="mr-3"
@@ -52,7 +52,7 @@ const Status = () => {
                   </a>
 
                   <a
-                    href="/assets/kelvinzhao_resume2023.pdf"
+                    href={resume}
                     target="_blank"
                     rel="noreferrer"
                   >

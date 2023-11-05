@@ -1,7 +1,6 @@
 import React from 'react'
 import items from './ProjectList'
 import ProjectItem from './ProjectItem'
-import z from '../../assets/z.png'
 const Projects = () => {
 	return (
 		<div className="self-center flex w-full max-w-[1195px] flex-col mt-32 max-md:max-w-full" id='projects'>
@@ -16,7 +15,6 @@ const Projects = () => {
 			</div>
 			<div className="self-center w-full max-w-[1195px] mt-40 px-5 max-md:max-w-full">
 				<div className="flex flex-col justify-center gap-2 overflow-hidden p-3 shadow-inner lg:flex-row">
-
 					{items.map((project, index) => (
 						<ProjectItem project={project} key={index}/>
 					))}

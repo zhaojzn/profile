@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import resume from '../assets/resume.pdf'
 import dropdown from '../assets/dropdown.png' 
 const Navbar = () => {
 
@@ -45,14 +46,24 @@ const Navbar = () => {
           Experience
         </button>
       </div>
-      <div className="text-white text-base self-stretch">Contact</div>
+      <div className="text-white text-base self-stretch">
+        <button onClick={() => scroll('#contact')}>
+            Contact
+          </button>
+      </div>
 
     </div>
     <div className="items-start self-stretch flex w-[158px] max-w-full justify-between gap-5">
 
       <div className="justify-center items-center border border-[color:var(--Light-2,#F1F1F1)] self-stretch flex w-[102px] max-w-full flex-col px-5 py-4 rounded-lg border-solid">
         <div className="text-white text-sm font-medium self-center">
+        <a
+                    href={resume}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
           Resume
+          </a>
         </div>
       </div>
     </div>
