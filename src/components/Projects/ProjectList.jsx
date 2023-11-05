@@ -12,7 +12,7 @@ const items = [
             </>
           ),
         image: z,
-        link: "https://jason.zhao.io/",
+        link: "https://zhaocs.dev",
         skills: ['React', 'Firebase', "Tailwind"]
     }
 
