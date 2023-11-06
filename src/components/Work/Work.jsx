@@ -24,7 +24,7 @@ const Work = (props) => {
                 </div>
               </div>
               <div className="text-white text-4xl font-bold mt-7">
-                Work Experices
+                Work Experiences 
               </div>
 
               {WorkList.map((company, index) => (
