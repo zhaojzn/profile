@@ -1,5 +1,5 @@
 import React from 'react'
-import jgo from '../assets/jgo.jpg'
+import jgo from '../assets/cow.jpg'
 
 const About = () => {
   return (
