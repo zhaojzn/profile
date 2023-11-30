@@ -23,7 +23,7 @@ const Status = () => {
                 </p>
 
                 <div>
-                  <a href="mailto:jasonnope123@gmail.com" className="mr-3">
+                  <a href="mailto:jason@zhaocs.dev" className="mr-3">
                     <button className="mt-3 rounded-full border border-[#006868] bg-[#006868] bg-opacity-0 py-1 px-4 font-medium text-white transition-all duration-100 hover:bg-opacity-100 active:bg-opacity-70">
                       Email
                     </button>
