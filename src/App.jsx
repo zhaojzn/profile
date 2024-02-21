@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import Home from "./pages/Home";
-import ReactGa from 'react-ga';
+import ReactGA from 'react-ga4';
 function App() {
 
   useEffect(() => {
-    ReactGa.initialize('G-7TSEF9YM8E')
-    ReactGa.pageview('/')
+    ReactGA.initialize('G-7TSEF9YM8E')
+    ReactGA.send({ hitType: "pageview", page: "/", title: "Welcome page" });
   }, [])
 
   return (
