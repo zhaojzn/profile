@@ -4,13 +4,12 @@ const Special = () => {
   return (
     <div className="bg-bg self-stretch flex w-full flex-col mt-48 px-5 py-10 max-md:max-w-full" id='special'>
     <div className="self-center flex ml-0 w-[141px] max-w-full items-start gap-4 mt-20">
-      <div className="bg-zinc-300 self-center flex w-4 h-0.5 flex-col my-auto" />
       <div className="text-white text-xs font-medium leading-6 tracking-[7.5px] self-stretch w-[209px]">
         SERVICES
     </div>
     </div>
     <div className="text-white text-4xl font-bold self-center mt-7">
-      Specialized in
+      SPECIALIZED IN
     </div>
     <div className="self-center ml-0 w-full max-w-[1195px] mt-28 mb-28 max-md:max-w-full">
       <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
