@@ -1,5 +1,6 @@
 import React from 'react'
 import z from '../../assets/z.png'
+import e from '../../assets/e.png'
 
 
 const items = [
@@ -12,9 +13,21 @@ const items = [
             </>
           ),
         image: z,
-        link: "https://zhaocs.dev",
+        link: "https://github.com/zhaojzn/pg-chat",
         skills: ['React', 'Firebase', "Tailwind"]
-    }
+    },
+    {
+        title: "Wun2Free Schedule",
+        description: (
+            <>
+                Helped in the development of a employee scheduling website.
+                Implemented custom endpoints for the website using Go and AWS CDK. 
+            </>
+          ),
+        image: e,
+        link: "https://github.com/jlui17/W2FHR",
+        skills: ['React', 'Go', "AWS CDK"]
+    },  
 
 ]
 
