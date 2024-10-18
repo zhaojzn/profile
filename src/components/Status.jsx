@@ -1,5 +1,5 @@
 import Headshot from '../assets/headshot.png'
-import resume from '../assets/resume.pdf'
+import resume from '../assets/jason_resume.pdf'
 import React from 'react'
 
 const Status = () => {
