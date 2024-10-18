@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import resume from '../assets/resume.pdf'
+import resume from '../assets/jason_resume.pdf'
 import dropdown from '../assets/dropdown.png'
 const Navbar = () => {
 
