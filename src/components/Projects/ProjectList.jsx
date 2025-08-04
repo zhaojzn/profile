@@ -33,8 +33,10 @@ const items = [
         description: (
             <>
                 Created a Spotify song suggestion app for the employees at working at Wun2Free.
-                Implemented a custom API to get the songs from the Spotify API.
                 Connected AWS Cognito with the app to allow users to login and use the app.
+                <br/><br/>
+                <b className='text-green-500'><a href='https://open.spotify.com/playlist/1R1gc0amaMvO8mi5yyKmY5?si=9065b3ddc0d046cd'>Press here to view the playlist</a></b>
+                <br/><br/>
             </>
           ),
         image: d,
