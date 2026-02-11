@@ -29,12 +29,12 @@ const Navbar = () => {
       className="aspect-[2.78] object-cover object-center w-[114px] self-center shrink-0 my-auto"
     /> */}
       <div className="justify-between items-start self-center flex w-[493px] max-w-full gap-5 my-auto max-md:flex-wrap max-md:justify-center">
-        <div className="text-white text-base font-medium self-stretch">
+        {/* <div className="text-white text-base font-medium self-stretch">
 
           <button onClick={() => scroll('#special')}>
             Service
           </button>
-        </div>
+        </div> */}
         <div className="text-white text-base self-stretch">
           <button onClick={() => scroll('#projects')}>
             Portfolios
