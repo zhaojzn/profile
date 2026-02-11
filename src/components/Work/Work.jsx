@@ -33,11 +33,13 @@ const Work = (props) => {
             </div>
           </div>
 
-          {WorkList.map((company, index) => (
-            currentCompany === company.name ? (
-              <WorkDesciprtion work={company} key={index} />
-            ) : null
-          ))}
+          <div className="flex flex-col items-stretch w-[71%] ml-5 max-md:w-full min-w-0">
+            {WorkList.map((company, index) => (
+              currentCompany === company.name ? (
+                <WorkDesciprtion work={company} key={index} />
+              ) : null
+            ))}
+          </div>
           {/* <div className="flex flex-col items-stretch w-[71%] ml-5 max-md:w-full">
             <div className="flex flex-col my-auto max-md:max-w-full max-md:mt-12">
               <div className="text-white text-lg font-medium underline max-w-[418px]">

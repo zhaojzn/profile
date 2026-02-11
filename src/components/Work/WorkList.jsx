@@ -28,7 +28,7 @@ mentor game attendants, monitor site safety, and handle inventory management.
                     </div>
                     <div className="flex w-3/4 max-w-full items-start gap-5 mt-5 max-md:flex-wrap">
                         <div className="bg-zinc-300 self-center flex w-2.5 h-0.5 flex-col my-auto" />
-                        <div className="text-zinc-500 text-base self-stretch grow  asis-auto max-md:max-w-full">
+                        <div className="text-zinc-500 text-base self-stretch grow basis-auto max-md:max-w-full">
                         Resolved customer complaints promptly and professionally.
                         </div>
                     </div>
