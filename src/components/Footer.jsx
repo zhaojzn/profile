@@ -26,6 +26,17 @@ const Footer = () => {
           className="aspect-square object-cover object-center w-6 shrink-0"
         />
         </a>
+
+        <a href="https://limewire.com/d/LAC8J#UW1nIILe9J" target="_blank" rel="noopener noreferrer" className="flex items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-6 h-6"
+          >
+            <path d="M13.828 10.172a4 4 0 0 0-5.656 0l-4 4a4 4 0 1 0 5.656 5.656l1.102-1.101m-.758-4.899a4 4 0 0 0 5.656 0l4-4a4 4 0 0 0-5.656-5.656l-1.1 1.1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+          </svg>
+        </a>
       </div>
 
     </div>
