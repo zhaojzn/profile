@@ -14,7 +14,7 @@ const Projects = () => {
 				PERSONAL PROJECTS
 			</div>
 			<div className="self-center w-full max-w-[1195px] mt-40 px-5 max-md:max-w-full">
-				<div className="flex flex-col justify-center gap-2 overflow-hidden p-3 shadow-inner lg:flex-row">
+				<div className="flex flex-col justify-center gap-2 overflow-hidden p-3 shadow-inner lg:flex-row lg:items-stretch">
 					{items.map((project, index) => (
 						<ProjectItem project={project} key={index}/>
 					))}

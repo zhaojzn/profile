@@ -27,9 +27,11 @@ const Work = (props) => {
                 Work Experiences 
               </div>
 
-              {WorkList.map((company, index) => (
-                <WorkItem company={company.name} change={setCurrentCompany} currentCompany={currentCompany} key={index} />
-              ))}
+              <div className="flex flex-col mt-4">
+                {WorkList.map((company, index) => (
+                  <WorkItem company={company.name} change={setCurrentCompany} currentCompany={currentCompany} key={index} />
+                ))}
+              </div>
             </div>
           </div>
 
