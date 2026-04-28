@@ -1,6 +1,6 @@
 import React from 'react'
 import z from '../../assets/flicka.png'
-import e from '../../assets/wun2free.jpeg   '
+import e from '../../assets/wun2free.jpeg'
 import d from '../../assets/d.png'
 import enc from '../../assets/enc.png'
 
