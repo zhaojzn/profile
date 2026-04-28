@@ -1,28 +1,37 @@
 import React from 'react'
-import z from '../../assets/flickapp.png'
-import e from '../../assets/e.png'
+import z from '../../assets/flicka.png'
+import e from '../../assets/wun2free.jpeg   '
 import d from '../../assets/d.png'
+import enc from '../../assets/enc.png'
 
 const items = [
     {
         title: "Flicka",
         description: (
             <>
-                Developed a real-time social application for sharing moments.
-                Used firebase for instant data syncing and authentication,.
+                Built a social photo-sharing app where users post one photo per day to maintain streaks, with real-time sync across iOS and Android.
             </>
         ),
         image: z,
-        link: "https://github.com/zhaojzn/pg-chat",
-        skills: ['React Native', 'Firebase', "Tailwind", "AWS CDK"]
+        link: "https://apps.apple.com/ca/app/flicka-flicks/id6753268294",
+        skills: ['React Native', 'Firebase', "Tailwind", "TypeScript"]
     },
     {
-
+        title: "Encore",
+        description: (
+            <>
+                Concert companion app integrating the Ticketmaster API to discover local events, track friends' attendance, and share seat locations. Awarded "Most Likely to Become a Startup" at SFU Surge's StormHacks.
+            </>
+        ),
+        image: enc,
+        link: "https://devpost.com/software/encore-vzilag",
+        skills: ['React Native', 'Firebase', "Tailwind", "TypeScript"]
+    },
+    {
         title: "Wun2Free Schedule",
         description: (
             <>
-                Helped in the development of a employee scheduling website.
-                Implemented custom endpoints for the website using Go and AWS CDK.
+                Helped in the development of an employee scheduling website. Implemented custom endpoints for the website using Go and AWS CDK.
             </>
         ),
         image: e,
@@ -33,11 +42,9 @@ const items = [
         title: "Spotify Suggestor",
         description: (
             <>
-                Created a Spotify song suggestion app for the employees at working at Wun2Free.
-                Connected AWS Cognito with the app to allow users to login and use the app.
+                Created a Spotify song suggestion app for the employees at Wun2Free. Connected AWS Cognito with the app for authentication.
                 <br /><br />
                 <b className='text-green-500'><a href='https://open.spotify.com/playlist/1R1gc0amaMvO8mi5yyKmY5?si=9065b3ddc0d046cd'>Press here to view the playlist</a></b>
-                <br /><br />
             </>
         ),
         image: d,

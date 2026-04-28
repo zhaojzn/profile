@@ -3,10 +3,15 @@ import icons from '../../lib/icons.js'
 const ProjectItem = ({ project }) => {
 	const { title, description, image, skills, link } = project
 	return (
-		<div className='mx-auto flex w-5/6 flex-col rounded-lg border border-neutral-600 border-opacity-50 bg-neutral-800 sm:w-96 lg:mx-1 lg:flex-1'>
-			<a href={link}>
+		<div className='flex flex-col rounded-lg border border-neutral-600 border-opacity-50 bg-neutral-800'>
+			<a href={link} className="relative h-56 rounded-tl-lg rounded-tr-lg overflow-hidden flex items-center justify-center">
 				<img
-					className="h-56 w-full rounded-tl-lg rounded-tr-lg object-cover opacity-100 shadow-2xl transition duration-100 hover:opacity-80"
+					className="absolute inset-0 h-full w-full object-cover blur-xl scale-110 opacity-50"
+					src={image}
+					alt=""
+				/>
+				<img
+					className="relative max-h-full max-w-full object-contain transition duration-100 hover:opacity-80"
 					src={image}
 					alt="project"
 				/>

@@ -14,7 +14,7 @@ const Projects = () => {
 				PERSONAL PROJECTS
 			</div>
 			<div className="self-center w-full max-w-[1195px] mt-40 px-5 max-md:max-w-full">
-				<div className="flex flex-col justify-center gap-2 overflow-hidden p-3 shadow-inner lg:flex-row lg:items-stretch">
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-3">
 					{items.map((project, index) => (
 						<ProjectItem project={project} key={index}/>
 					))}
