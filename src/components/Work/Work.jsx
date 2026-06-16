@@ -12,20 +12,18 @@ const Work = (props) => {
   };
 
   return (
-    <div className="bg-bg self-stretch flex flex-col ml-0.5 mt-44 px-5 py-10 max-md:max-w-full" id='work'>
-      <div className="self-center ml-0 w-full max-w-[1204px] mt-20 mb-16 max-md:max-w-full">
-        <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
-          <div className="flex flex-col items-stretch w-[29%] max-md:w-full">
-            <div className="flex grow flex-col max-md:mt-12">
-              <div className="flex w-[186px] max-w-full items-start gap-4">
-                <div className="bg-zinc-300 self-center flex w-4 h-0.5 flex-col my-auto" />
-                <div className="text-zinc-500 text-xs font-medium leading-6 tracking-[7.5px] uppercase self-stretch">
-                  career path
-                </div>
+    <section className="bg-bg" id="work">
+      <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
+        <div className="flex flex-col gap-10 md:flex-row md:gap-12">
+          <div className="md:w-[29%]">
+            <div className="flex grow flex-col">
+              <div className="flex items-center gap-3 text-zinc-400">
+                <span className="block h-px w-8 bg-zinc-600" />
+                <span className="text-[11px] font-medium uppercase tracking-[0.4em]">career path</span>
               </div>
-              <div className="text-white text-4xl font-bold mt-7">
-                Work Experiences 
-              </div>
+              <h2 className="mt-6 text-3xl font-bold text-white sm:text-4xl">
+                Experience
+              </h2>
 
               <div className="flex flex-col mt-4">
                 {WorkList.map((company, index) => (
@@ -35,7 +33,7 @@ const Work = (props) => {
             </div>
           </div>
 
-          <div className="flex flex-col items-stretch w-[71%] ml-5 max-md:w-full min-w-0">
+          <div className="min-w-0 flex-1">
             {WorkList.map((company, index) => (
               currentCompany === company.name ? (
                 <WorkDesciprtion work={company} key={index} />
@@ -94,7 +92,7 @@ const Work = (props) => {
           </div> */}
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

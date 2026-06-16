@@ -1,45 +1,34 @@
 import React from 'react'
 import items from './ProjectList'
 import ProjectItem from './ProjectItem'
+
 const Projects = () => {
-	return (
-		<div className="self-center flex w-full max-w-[1195px] flex-col mt-32 max-md:max-w-full" id='projects'>
-			<div className="self-center flex ml-0 w-[141px] max-w-full items-start gap-4 mt-20">
-				<div className="bg-white self-center flex w-4 h-0.5 flex-col my-auto" />
-				<div className="text-white text-xs font-medium leading-6 tracking-[8.5px] self-stretch w-[209px]">
-					PORTFOLIO
-				</div>
-			</div>
-			<div className="text-white text-4xl font-bold self-center mt-7">
-				PERSONAL PROJECTS
-			</div>
-			<div className="self-center w-full max-w-[1195px] mt-40 px-5 max-md:max-w-full">
-				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-3">
-					{items.map((project, index) => (
-						<ProjectItem project={project} key={index}/>
-					))}
-							
-					{/* <div className='mx-auto flex h-full w-5/6 flex-col items-center justify-center rounded-lg border border-neutral-600 border-opacity-50 bg-neutral-800 sm:w-96 lg:mx-1'>
-						<div className="flex h-full w-full flex-col items-center justify-center">
-							<img
-								className="h-96 w-full rounded-tl-lg rounded-tr-lg object-cover opacity-100 shadow-2xl transition duration-100 hover:opacity-80"
-								src={z}
-								alt="project"
-							/>
-							<div className="flex h-full w-full flex-col px-3 pb-4 pt-2 text-white">
-								<h1 className="text-center text-2xl font-semibold">PGSS Chat</h1>
-								<p className="border-t border-b border-neutral-700 py-2 text-center">
-									Test
-								</p>
-								<div className="mt-3 flex flex-row content-start justify-start">
-								</div>
-							</div>
-						</div>
-					</div> */}
-				</div>
-			</div>
-		</div>
-	)
+  return (
+    <section
+      id="projects"
+      className="mx-auto w-full max-w-6xl px-6 py-28 md:py-40"
+    >
+      <div className="flex items-center gap-3 text-zinc-400">
+        <span className="block h-px w-8 bg-zinc-600" />
+        <span className="text-[11px] font-medium uppercase tracking-[0.4em]">portfolio</span>
+      </div>
+
+      <div className="mt-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+        <h2 className="text-3xl font-bold text-white sm:text-4xl">
+          Personal projects
+        </h2>
+        <p className="max-w-md text-sm leading-relaxed text-zinc-400">
+          A selection of things I've built — shipped apps, hackathon wins, and side experiments.
+        </p>
+      </div>
+
+      <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
+        {items.map((project, index) => (
+          <ProjectItem project={project} key={index} />
+        ))}
+      </div>
+    </section>
+  )
 }
 
 export default Projects

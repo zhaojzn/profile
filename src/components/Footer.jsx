@@ -1,45 +1,56 @@
 import React from 'react'
 
+const InstagramIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" {...props}>
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+  </svg>
+)
+
+const GithubIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.07-.73.08-.72.08-.72 1.18.08 1.8 1.21 1.8 1.21 1.05 1.8 2.76 1.28 3.43.98.11-.76.41-1.28.74-1.57-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.19 1.18a11 11 0 0 1 5.8 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.79 1.07.79 2.17v3.22c0 .31.21.68.8.56C20.21 21.4 23.5 17.09 23.5 12 23.5 5.65 18.35.5 12 .5z" />
+  </svg>
+)
+
+const LinkedinIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.36 4.26 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z" />
+  </svg>
+)
+
 const Footer = () => {
   return (
-    <div className="justify-center items-center bg-bg self-stretch flex grow flex-col mr-1 px-5 py-10 max-md:max-w-full">
-      <div className="items-start self-center flex w-48 max-w-full justify-between gap-5 mt-12 max-md:justify-center">
+    <footer className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 border-t border-white/5 px-6 py-10 sm:flex-row sm:justify-between">
+      <p className="text-xs text-zinc-500">
+        © {new Date().getFullYear()} Jason Zhao
+      </p>
 
-        <a href="https://www.instagram.com/jason.zhaooo/">
-          <img
-            loading="lazy"
-            srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&"
-            className="aspect-square object-cover object-center w-6 shrink-0"
-          />
+      <div className="flex items-center gap-5 text-zinc-400">
+        <a
+          href="https://www.instagram.com/jason.zhaooo/"
+          aria-label="Instagram"
+          className="transition hover:text-white"
+        >
+          <InstagramIcon className="h-5 w-5" />
         </a>
-        <a href="https://github.com/zhaojzn">
-          <img
-            loading="lazy"
-            srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&"
-            className="aspect-square object-cover object-center w-6 shrink-0"
-          />
+        <a
+          href="https://github.com/zhaojzn"
+          aria-label="GitHub"
+          className="transition hover:text-white"
+        >
+          <GithubIcon className="h-5 w-5" />
         </a>
-        <a href='https://www.linkedin.com/in/jason-zhao-bab03b187/'>
-        <img
-          loading="lazy"
-          srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&"
-          className="aspect-square object-cover object-center w-6 shrink-0"
-        />
-        </a>
-
-        <a href="https://limewire.com/d/LAC8J#UW1nIILe9J" target="_blank" rel="noopener noreferrer" className="flex items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6"
-          >
-            <path d="M13.828 10.172a4 4 0 0 0-5.656 0l-4 4a4 4 0 1 0 5.656 5.656l1.102-1.101m-.758-4.899a4 4 0 0 0 5.656 0l4-4a4 4 0 0 0-5.656-5.656l-1.1 1.1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-          </svg>
+        <a
+          href="https://www.linkedin.com/in/jason-zhao-bab03b187/"
+          aria-label="LinkedIn"
+          className="transition hover:text-white"
+        >
+          <LinkedinIcon className="h-5 w-5" />
         </a>
       </div>
-
-    </div>
+    </footer>
   )
 }
 

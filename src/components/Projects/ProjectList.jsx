@@ -1,10 +1,22 @@
 import React from 'react'
+import chapt from '../../assets/chapt.png'
 import z from '../../assets/flicka.png'
 import e from '../../assets/wun2free.jpeg'
 import d from '../../assets/d.png'
 import enc from '../../assets/enc.png'
 
 const items = [
+    {
+        title: "Chapt",
+        description: (
+            <>
+                Designed and launched a polaroid-style shared photo album to the iOS App Store. Architected a serverless AWS backend with 30+ Lambda functions and 16 DynamoDB tables behind HTTP and WebSocket API Gateways.
+            </>
+        ),
+        image: chapt,
+        link: "https://chapt.app",
+        skills: ['React Native', 'TypeScript', 'AWS CDK', 'DynamoDB']
+    },
     {
         title: "Flicka",
         description: (

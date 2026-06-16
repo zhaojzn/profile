@@ -1,58 +1,83 @@
 import React from 'react'
 import jgo from '../assets/bro.jpg'
 
+const InstagramIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" {...props}>
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+  </svg>
+)
+
+const GithubIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.07-.73.08-.72.08-.72 1.18.08 1.8 1.21 1.8 1.21 1.05 1.8 2.76 1.28 3.43.98.11-.76.41-1.28.74-1.57-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.19 1.18a11 11 0 0 1 5.8 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.79 1.07.79 2.17v3.22c0 .31.21.68.8.56C20.21 21.4 23.5 17.09 23.5 12 23.5 5.65 18.35.5 12 .5z" />
+  </svg>
+)
+
+const LinkedinIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.36 4.26 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z" />
+  </svg>
+)
+
+const Sectionlabel = ({ children }) => (
+  <div className="flex items-center gap-3 text-zinc-400">
+    <span className="block h-px w-8 bg-zinc-600" />
+    <span className="text-[11px] font-medium uppercase tracking-[0.4em]">{children}</span>
+  </div>
+)
+
 const About = () => {
   return (
-    <div className="self-center flex w-full max-w-[1204px] items-start justify-between gap-5 mt-48 px-5 max-md:max-w-full max-md:flex-wrap" id='about'>
-      <div className="self-center flex flex-col my-auto max-md:max-w-full">
-        <div className="flex w-[170px] max-w-full items-start gap-4">
-          <div className="bg-zinc-300 self-center flex w-4 h-0.5 flex-col my-auto" />
-          <div className="text-white text-xs font-medium leading-6 tracking-[7.5px] self-stretch w-[209px]">
-            MY NAME IS
-          </div>
-        </div>
-        <div className="text-white text-5xl font-bold mt-9">
-          <span className="text-white">Jason Zhao</span>
+    <section
+      id="about"
+      className="mx-auto flex w-full max-w-6xl flex-col-reverse items-center gap-12 px-6 pt-20 md:flex-row md:items-center md:justify-between md:gap-16 md:pt-32"
+    >
+      <div className="max-w-xl">
+        <Sectionlabel>my name is</Sectionlabel>
+        <h1 className="mt-6 text-4xl font-bold leading-tight text-white sm:text-5xl">
+          Jason Zhao
+        </h1>
+        <p className="mt-6 text-base leading-relaxed text-zinc-300">
+          Hey there 👋, I'm Jason Zhao, a 20-year-old student aspiring to become a{' '}
+          <span className="font-semibold text-indigo-400">Software Engineer</span>. Ever since I
+          was little I've been intrigued by the idea of creating something that can be used by
+          millions of people around the world.
+        </p>
 
-        </div>
-        <div className="text-gray-800 text-base leading-8 w-[538px] max-w-full mt-9 text-white">
-          Hey there 👋, I'm Jason Zhao, a 20-year-old student aspiring to become a
-          <span className='text-indigo-400 font-bold '> Software Engineer</span>. Ever since I was little i've always been intrigued by the idea of creating something that can be used by millions of people around the world.
-        </div>
-        <div className="items-start flex w-48 max-w-full justify-between gap-5 mt-12 max-md:justify-center">
-          <a href="https://www.instagram.com/jason.zhaooo/">
-            <img
-              loading="lazy"
-              srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/792db86d-ce8d-4d59-a26f-5559b4d70dbc?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&"
-              className="aspect-square object-cover object-center w-6 shrink-0"
-            />
+        <div className="mt-8 flex items-center gap-5 text-zinc-300">
+          <a
+            href="https://www.instagram.com/jason.zhaooo/"
+            aria-label="Instagram"
+            className="transition hover:text-white"
+          >
+            <InstagramIcon className="h-6 w-6" />
           </a>
-          <a href="https://github.com/zhaojzn">
-            <img
-              loading="lazy"
-              srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/f8057ab0-e7d9-4537-9ee0-4026f3ad7c74?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&"
-              className="aspect-square object-cover object-center w-6 shrink-0"
-            />
+          <a
+            href="https://github.com/zhaojzn"
+            aria-label="GitHub"
+            className="transition hover:text-white"
+          >
+            <GithubIcon className="h-6 w-6" />
           </a>
-          <a href='https://www.linkedin.com/in/jason-zhao-bab03b187/'>
-            <img
-              loading="lazy"
-              srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/0b4a77d4-932c-4158-9bc2-375ec77b9a89?apiKey=62cc1c00d0454fed8ec6b8f31dfdb7b5&"
-              className="aspect-square object-cover object-center w-6 shrink-0"
-            />
+          <a
+            href="https://www.linkedin.com/in/jason-zhao-bab03b187/"
+            aria-label="LinkedIn"
+            className="transition hover:text-white"
+          >
+            <LinkedinIcon className="h-6 w-6" />
           </a>
         </div>
       </div>
+
       <img
         loading="lazy"
         src={jgo}
-        //resize the image to make it smaller
-        className="aspect-[0.86] object-cover object-center w-[512px] self-stretch rounded-2xl"
-
+        alt="Jason Zhao"
+        className="aspect-[0.86] w-full max-w-sm rounded-2xl object-cover object-center md:max-w-md"
       />
-    </div>
-
-
+    </section>
   )
 }
 
