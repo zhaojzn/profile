@@ -68,3 +68,22 @@ export function fmtClock(iso) {
     minute: "2-digit",
   });
 }
+
+// Whole kilometres with thousands separators — for big lifetime totals.
+export function fmtTotalKm(meters) {
+  return (meters / 1000).toLocaleString(undefined, { maximumFractionDigits: 0 }) + " km";
+}
+
+// Total moving time as a compact "Xh" / "Xd Yh" for lifetime sums.
+export function fmtTotalTime(sec) {
+  const hours = sec / 3600;
+  if (hours < 24) return `${Math.round(hours)}h`;
+  const d = Math.floor(hours / 24);
+  const h = Math.round(hours % 24);
+  return `${d}d ${h}h`;
+}
+
+// "Jun 2026" — month-bucket label.
+export function fmtMonth(iso) {
+  return new Date(iso).toLocaleDateString(undefined, { month: "short", year: "numeric" });
+}
