@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import resume from '../assets/jason_resume.pdf'
 
 const Navbar = () => {
@@ -30,6 +31,7 @@ const Navbar = () => {
       <nav className="flex items-center gap-8">
         <NavButton targetId="#projects">Portfolio</NavButton>
         <NavButton targetId="#work">Experience</NavButton>
+        <Link to="/runs" className="text-sm text-zinc-300 transition hover:text-white">Runs</Link>
         <NavButton targetId="#contact">Contact</NavButton>
       </nav>
 

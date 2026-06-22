@@ -1,5 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import jgo from '../assets/bro.jpg'
+
+// Tabler "run" — a running figure.
+const RunningIcon = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <circle cx="13" cy="4" r="1" />
+    <path d="M4 17l5 1l.75 -1.5" />
+    <path d="M15 21l0 -4l-4 -3l1 -6" />
+    <path d="M7 12l0 -3l5 -1l3 3l3 1" />
+  </svg>
+)
 
 const InstagramIcon = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" {...props}>
@@ -45,6 +56,21 @@ const About = () => {
           was little I've been intrigued by the idea of creating something that can be used by
           millions of people around the world.
         </p>
+        <p className="mt-4 text-base leading-relaxed text-zinc-300">
+          Outside of code, I'm currently{' '}
+          <span className="font-semibold text-[#fc5200]">training to run my first marathon</span>.
+        </p>
+
+        <div className="mt-8">
+          <Link
+            to="/runs"
+            className="group inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/[0.06]"
+          >
+            <RunningIcon className="h-4 w-4 text-[#fc5200] transition group-hover:scale-110" />
+            See my runs
+            <span className="text-zinc-500 transition group-hover:translate-x-0.5 group-hover:text-zinc-300">→</span>
+          </Link>
+        </div>
 
         <div className="mt-8 flex items-center gap-5 text-zinc-300">
           <a
