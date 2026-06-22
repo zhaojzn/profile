@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { fetchRun, fmtDate, fmtDuration, fmtKm, fmtPace, fmtClock } from '../lib/runs'
 import PieChart from '../components/run/PieChart'
 import PaceChart from '../components/run/PaceChart'
+import HeartRateZones from '../components/run/HeartRateZones'
 
 export default function RunDetail() {
   const { id } = useParams()
@@ -46,6 +47,7 @@ export default function RunDetail() {
   }
 
   const hasStreams = run.streams && run.streams.time?.length > 1
+  const hasHr = hasStreams && run.streams.heartrate?.length > 1
 
   return (
     <Shell>
@@ -68,7 +70,14 @@ export default function RunDetail() {
           </div>
         </header>
 
-        {hasStreams && (
+        {hasHr ? (
+          <Section title="Heart rate zones">
+            <HeartRateZones streams={run.streams} />
+            <p className="mt-4 text-xs text-zinc-500">
+              Time spent in each zone, as a share of moving time. Zones are % of max HR.
+            </p>
+          </Section>
+        ) : hasStreams ? (
           <Section title="Pace + music">
             <PaceChart
               startTime={run.startTime}
@@ -80,7 +89,7 @@ export default function RunDetail() {
               Faster pace is higher. Hover a dot to see which track started playing at that moment.
             </p>
           </Section>
-        )}
+        ) : null}
 
         {run.genreBreakdown.length > 0 && (
           <Section title="Genre mix">
