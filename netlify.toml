@@ -1,3 +1,7 @@
+[build.environment]
+  # Vite 8 needs Node 20.19+/22.12+; Netlify defaults to 18 without this.
+  NODE_VERSION = "22"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
