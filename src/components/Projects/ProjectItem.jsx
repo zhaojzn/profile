@@ -15,17 +15,17 @@ const ProjectItem = ({ project }) => {
       href={link}
       target="_blank"
       rel="noreferrer"
-      className="group flex flex-col overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] transition hover:border-white/20 hover:bg-white/[0.04]"
+      className="group flex flex-col overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] transition-colors hover:border-white/20"
     >
-      <div className="relative flex h-56 items-center justify-center overflow-hidden bg-neutral-900">
+      <div className="relative flex h-48 items-center justify-center overflow-hidden bg-neutral-900 sm:h-52">
         <img
           aria-hidden
-          className="absolute inset-0 h-full w-full object-cover opacity-30 blur-2xl scale-110"
+          className="absolute inset-0 h-full w-full scale-110 object-cover opacity-25 blur-2xl"
           src={image}
           alt=""
         />
         <img
-          className="relative max-h-full max-w-full object-contain transition duration-300 group-hover:scale-105"
+          className="relative max-h-full max-w-full object-contain"
           src={image}
           alt={title}
         />
@@ -33,8 +33,8 @@ const ProjectItem = ({ project }) => {
 
       <div className="flex flex-1 flex-col gap-3 px-5 pb-5 pt-4 text-white">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="text-lg font-semibold">{title}</h3>
-          <ArrowUpRight className="h-4 w-4 text-zinc-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
+          <h3 className="text-base font-semibold">{title}</h3>
+          <ArrowUpRight className="h-4 w-4 shrink-0 text-zinc-500 transition-colors group-hover:text-white" />
         </div>
         <p className="text-sm leading-relaxed text-zinc-400">
           {description}
@@ -43,7 +43,7 @@ const ProjectItem = ({ project }) => {
           {skills.map((skill, index) => (
             <span
               key={index}
-              className="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs text-zinc-300"
+              className="inline-flex items-center gap-1.5 rounded-md border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 font-mono text-[11px] text-zinc-400"
             >
               {icons[skill] && <i className={icons[skill]} />}
               {skill}

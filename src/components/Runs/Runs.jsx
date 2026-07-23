@@ -31,22 +31,17 @@ const Runs = () => {
   const stats = useMemo(() => (runs ? computeStats(runs) : null), [runs])
 
   return (
-    <section id="runs" className="mx-auto w-full max-w-6xl px-6 pb-28 pt-16 md:pb-36 md:pt-24">
-      <div className="flex items-center gap-3 text-zinc-400">
-        <span className="block h-px w-8 bg-zinc-600" />
-        <span className="text-[11px] font-medium uppercase tracking-[0.4em]">off the clock</span>
-      </div>
-
-      <div className="mt-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
-        <h2 className="text-3xl font-bold text-white sm:text-4xl">Running</h2>
+    <section id="runs" className="mx-auto w-full max-w-6xl px-5 pb-24 pt-14 sm:px-6 md:pb-32 md:pt-20">
+      <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+        <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Running</h2>
         <p className="max-w-md text-sm leading-relaxed text-zinc-400">
-          Every run I log, with the music I listened to and the genre mix it added up to —
-          pulled automatically from Strava. Currently training for my first marathon.
+          Every run I log, plus the music I listened to and the genre mix it added up to.
+          Pulled automatically from Strava, while I train for my first marathon.
         </p>
       </div>
 
       {error && (
-        <p className="mt-14 text-sm text-zinc-500">Runs are syncing — check back soon.</p>
+        <p className="mt-14 text-sm text-zinc-500">Runs are syncing. Check back soon.</p>
       )}
 
       {runs === null && !error && <Skeleton />}
@@ -96,7 +91,7 @@ const Runs = () => {
             <div className="mt-10 flex flex-col items-center gap-3">
               <button
                 onClick={() => setVisible(v => v + PAGE)}
-                className="rounded-full border border-white/15 bg-white/[0.03] px-6 py-2.5 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/[0.06]"
+                className="rounded-md border border-white/15 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-white/30"
               >
                 View more
               </button>
@@ -117,8 +112,8 @@ const Heading = ({ children }) => (
 
 const BigStat = ({ label, value }) => (
   <div className="bg-[#121212] px-4 py-5 sm:px-6 sm:py-6">
-    <div className="text-[11px] uppercase tracking-wider text-zinc-500">{label}</div>
-    <div className="mt-1.5 text-2xl font-bold tabular-nums text-white sm:text-3xl">{value}</div>
+    <div className="font-mono text-[11px] uppercase tracking-wider text-zinc-500">{label}</div>
+    <div className="mt-1.5 text-2xl font-semibold tabular-nums text-white sm:text-3xl">{value}</div>
   </div>
 )
 
@@ -126,10 +121,10 @@ const BestCard = ({ label, value, sub, to }) => {
   const inner = (
     <>
       <div className="flex items-start justify-between gap-2">
-        <div className="text-[11px] uppercase tracking-wider text-zinc-500">{label}</div>
-        {to && <ArrowUpRight className="h-3.5 w-3.5 text-zinc-500 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />}
+        <div className="font-mono text-[11px] uppercase tracking-wider text-zinc-500">{label}</div>
+        {to && <ArrowUpRight className="h-3.5 w-3.5 text-zinc-500 transition-colors group-hover:text-white" />}
       </div>
-      <div className="mt-2 text-xl font-bold tabular-nums text-white">{value}</div>
+      <div className="mt-2 text-xl font-semibold tabular-nums text-white">{value}</div>
       {sub && <div className="mt-1 text-xs text-zinc-400">{sub}</div>}
     </>
   )
@@ -169,10 +164,10 @@ const RunCard = ({ run }) => {
       <div>
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <div className="text-[11px] uppercase tracking-wider text-zinc-500">{fmtDate(run.startTime)}</div>
+            <div className="font-mono text-[11px] uppercase tracking-wider text-zinc-500">{fmtDate(run.startTime)}</div>
             <h3 className="mt-1 truncate text-lg font-semibold text-white">{run.name || 'Run'}</h3>
           </div>
-          <ArrowUpRight className="h-4 w-4 shrink-0 text-zinc-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
+          <ArrowUpRight className="h-4 w-4 shrink-0 text-zinc-400 transition-colors group-hover:text-white" />
         </div>
         <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
           <CardStat label="Distance" value={fmtKm(run.distanceMeters || 0)} />
@@ -206,7 +201,7 @@ const RunCard = ({ run }) => {
 
 const CardStat = ({ label, value }) => (
   <div>
-    <div className="text-[10px] uppercase tracking-wider text-zinc-500">{label}</div>
+    <div className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">{label}</div>
     <div className="mt-0.5 text-sm font-medium tabular-nums text-zinc-200">{value}</div>
   </div>
 )

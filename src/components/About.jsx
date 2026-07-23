@@ -1,16 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { fetchRuns, fmtDate, fmtKm, fmtPace } from '../lib/runs'
 import jgo from '../assets/bro.jpg'
-
-// Tabler "run" — a running figure.
-const RunningIcon = (props) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <circle cx="13" cy="4" r="1" />
-    <path d="M4 17l5 1l.75 -1.5" />
-    <path d="M15 21l0 -4l-4 -3l1 -6" />
-    <path d="M7 12l0 -3l5 -1l3 3l3 1" />
-  </svg>
-)
 
 const InstagramIcon = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" {...props}>
@@ -32,27 +23,59 @@ const LinkedinIcon = (props) => (
   </svg>
 )
 
-const Sectionlabel = ({ children }) => (
-  <div className="flex items-center gap-3 text-zinc-400">
-    <span className="block h-px w-8 bg-zinc-600" />
-    <span className="text-[11px] font-medium uppercase tracking-[0.4em]">{children}</span>
-  </div>
-)
+// Latest logged run, pulled live from the same Strava-backed API the /runs
+// page uses. Renders nothing until it resolves and stays hidden on failure so
+// a slow or down API never leaves a broken placeholder in the hero.
+const LatestRun = () => {
+  const [run, setRun] = useState(null)
+
+  useEffect(() => {
+    let cancelled = false
+    fetchRuns()
+      .then((items) => { if (!cancelled && items.length) setRun(items[0]) })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [])
+
+  if (!run) return null
+
+  return (
+    <Link
+      to={`/run/${run.activityId}`}
+      className="group mt-8 inline-flex flex-wrap items-center gap-x-3 gap-y-1 text-zinc-400 transition-colors hover:text-zinc-200"
+    >
+      <span className="relative flex h-2 w-2 shrink-0">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#fc5200] opacity-60" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-[#fc5200]" />
+      </span>
+      <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-500">Last run</span>
+      <span className="font-mono text-xs tabular-nums">
+        {fmtDate(run.startTime)} · {fmtKm(run.distanceMeters || 0)} · {fmtPace(run.distanceMeters, run.elapsedSeconds)}
+      </span>
+      <span className="text-zinc-600 transition-colors group-hover:text-[#fc5200]">→</span>
+    </Link>
+  )
+}
+
+const social = [
+  { href: 'https://www.instagram.com/jason.zhaooo/', label: 'Instagram', Icon: InstagramIcon },
+  { href: 'https://github.com/zhaojzn', label: 'GitHub', Icon: GithubIcon },
+  { href: 'https://www.linkedin.com/in/jason-zhao-bab03b187/', label: 'LinkedIn', Icon: LinkedinIcon },
+]
 
 const About = () => {
   return (
     <section
       id="about"
-      className="mx-auto flex w-full max-w-6xl flex-col-reverse items-center gap-12 px-6 pt-20 md:flex-row md:items-center md:justify-between md:gap-16 md:pt-32"
+      className="mx-auto flex w-full max-w-5xl scroll-mt-24 flex-col gap-12 px-5 pb-4 pt-16 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-16 md:pt-24"
     >
       <div className="max-w-xl">
-        <Sectionlabel>my name is</Sectionlabel>
-        <h1 className="mt-6 text-4xl font-bold leading-tight text-white sm:text-5xl">
+        <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
           Jason Zhao
         </h1>
         <p className="mt-6 text-base leading-relaxed text-zinc-300">
-          Hey there 👋, I'm Jason Zhao, a 20-year-old student aspiring to become a{' '}
-          <span className="font-semibold text-indigo-400">Software Engineer</span>. Ever since I
+          Hey there 👋, I'm Jason Zhao, a 21 year-old student aspiring to become a{' '}
+          <span className="font-semibold text-accent">Software Engineer</span>. Ever since I
           was little I've been intrigued by the idea of creating something that can be used by
           millions of people around the world.
         </p>
@@ -61,39 +84,14 @@ const About = () => {
           <span className="font-semibold text-[#fc5200]">training to run my first marathon</span>.
         </p>
 
-        <div className="mt-8">
-          <Link
-            to="/runs"
-            className="group inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.03] px-5 py-2.5 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/[0.06]"
-          >
-            <RunningIcon className="h-4 w-4 text-[#fc5200] transition group-hover:scale-110" />
-            See my runs
-            <span className="text-zinc-500 transition group-hover:translate-x-0.5 group-hover:text-zinc-300">→</span>
-          </Link>
-        </div>
+        <LatestRun />
 
-        <div className="mt-8 flex items-center gap-5 text-zinc-300">
-          <a
-            href="https://www.instagram.com/jason.zhaooo/"
-            aria-label="Instagram"
-            className="transition hover:text-white"
-          >
-            <InstagramIcon className="h-6 w-6" />
-          </a>
-          <a
-            href="https://github.com/zhaojzn"
-            aria-label="GitHub"
-            className="transition hover:text-white"
-          >
-            <GithubIcon className="h-6 w-6" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/jason-zhao-bab03b187/"
-            aria-label="LinkedIn"
-            className="transition hover:text-white"
-          >
-            <LinkedinIcon className="h-6 w-6" />
-          </a>
+        <div className="mt-9 flex items-center gap-5 text-zinc-400">
+          {social.map(({ href, label, Icon }) => (
+            <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} className="transition-colors hover:text-white">
+              <Icon className="h-[22px] w-[22px]" />
+            </a>
+          ))}
         </div>
       </div>
 
@@ -101,7 +99,8 @@ const About = () => {
         loading="lazy"
         src={jgo}
         alt="Jason Zhao"
-        className="aspect-[0.86] w-full max-w-sm rounded-2xl object-cover object-center md:max-w-md"
+        className="w-full max-w-xs self-center rounded-xl object-cover object-center md:max-w-sm"
+        style={{ aspectRatio: '0.86' }}
       />
     </section>
   )

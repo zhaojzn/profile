@@ -53,13 +53,10 @@ export default function RunDetail() {
     <Shell>
       <main className="mx-auto w-full max-w-3xl flex-1 px-6 pb-20 pt-10 sm:pt-14">
         <header className="mb-10">
-          <div className="mb-3 flex items-center gap-3 text-zinc-400">
-            <span className="block h-px w-8 bg-zinc-600" />
-            <span className="text-[11px] font-medium uppercase tracking-[0.35em]">
-              {fmtDate(run.startTime)}{run.musicSource && ` · music via ${run.musicSource}`}
-            </span>
+          <div className="mb-3 font-mono text-xs uppercase tracking-wider text-zinc-500">
+            {fmtDate(run.startTime)}{run.musicSource && ` · music via ${run.musicSource}`}
           </div>
-          <h1 className="mb-6 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h1 className="mb-6 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             {run.name || 'Run'}
           </h1>
           <div className="flex flex-wrap gap-x-10 gap-y-4">
@@ -150,12 +147,12 @@ export default function RunDetail() {
 function Shell({ children }) {
   return (
     <div className="flex min-h-screen flex-col bg-bg text-white antialiased">
-      <header className="border-b border-white/5">
-        <div className="mx-auto flex w-full max-w-3xl items-center justify-between px-6 py-5">
-          <Link to="/" className="text-sm font-semibold tracking-wide text-white">
+      <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-bg/90 backdrop-blur-sm">
+        <div className="mx-auto flex w-full max-w-3xl items-center justify-between px-5 py-4 sm:px-6 sm:py-5">
+          <Link to="/" className="text-[15px] font-semibold tracking-tight text-white">
             jason zhao
           </Link>
-          <Link to="/runs" className="text-sm text-zinc-300 transition hover:text-white">
+          <Link to="/runs" className="text-sm text-zinc-400 transition-colors hover:text-white">
             Runs
           </Link>
         </div>
@@ -177,7 +174,7 @@ function Section({ title, children }) {
 function Stat({ label, value }) {
   return (
     <div>
-      <div className="mb-1 text-[11px] uppercase tracking-wider text-zinc-500">{label}</div>
+      <div className="mb-1 font-mono text-[11px] uppercase tracking-wider text-zinc-500">{label}</div>
       <div className="text-lg font-medium tabular-nums text-white">{value}</div>
     </div>
   )

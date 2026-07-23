@@ -22,8 +22,8 @@ const LinkedinIcon = (props) => (
 
 const Footer = () => {
   return (
-    <footer className="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 border-t border-white/5 px-6 py-10 sm:flex-row sm:justify-between">
-      <p className="text-xs text-zinc-500">
+    <footer className="mx-auto flex w-full max-w-5xl flex-col items-center gap-4 border-t border-white/[0.06] px-5 py-10 sm:flex-row sm:justify-between sm:px-6">
+      <p className="font-mono text-xs text-zinc-500">
         © {new Date().getFullYear()} Jason Zhao
       </p>
 

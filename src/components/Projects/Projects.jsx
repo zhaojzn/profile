@@ -4,25 +4,15 @@ import ProjectItem from './ProjectItem'
 
 const Projects = () => {
   return (
-    <section
-      id="projects"
-      className="mx-auto w-full max-w-6xl px-6 py-28 md:py-40"
-    >
-      <div className="flex items-center gap-3 text-zinc-400">
-        <span className="block h-px w-8 bg-zinc-600" />
-        <span className="text-[11px] font-medium uppercase tracking-[0.4em]">portfolio</span>
-      </div>
-
-      <div className="mt-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
-        <h2 className="text-3xl font-bold text-white sm:text-4xl">
-          Personal projects
-        </h2>
-        <p className="max-w-md text-sm leading-relaxed text-zinc-400">
-          A selection of things I've built — shipped apps, hackathon wins, and side experiments.
+    <section id="projects" className="mx-auto w-full max-w-5xl scroll-mt-20 px-5 py-20 sm:px-6 md:py-28">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">Projects</h2>
+        <p className="max-w-sm text-sm leading-relaxed text-zinc-400">
+          Apps I've shipped, a couple of hackathon builds, and side experiments.
         </p>
       </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
         {items.map((project, index) => (
           <ProjectItem project={project} key={index} />
         ))}
