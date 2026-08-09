@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { fetchRuns, fmtDate, fmtKm, fmtPace } from '../lib/runs'
-import jgo from '../assets/bro.jpg'
 
 const InstagramIcon = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" {...props}>
@@ -67,7 +66,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="mx-auto flex w-full max-w-5xl scroll-mt-24 flex-col gap-12 px-5 pb-4 pt-16 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-16 md:pt-24"
+      className="mx-auto w-full max-w-5xl scroll-mt-24 px-5 pb-4 pt-16 sm:px-6 md:pt-24"
     >
       <div className="max-w-xl">
         <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
@@ -94,14 +93,6 @@ const About = () => {
           ))}
         </div>
       </div>
-
-      <img
-        loading="lazy"
-        src={jgo}
-        alt="Jason Zhao"
-        className="w-full max-w-xs self-center rounded-xl object-cover object-center md:max-w-sm"
-        style={{ aspectRatio: '0.86' }}
-      />
     </section>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import Headshot from '../assets/headshot.png'
+import me from '../assets/me.png'
 import resume from '../assets/jason_resume.pdf'
 
 const ContactButton = ({ href, children, primary = false, ...rest }) => (
@@ -23,7 +23,7 @@ const Status = () => {
         <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-center sm:gap-8 sm:text-left">
           <img
             className="h-20 w-20 shrink-0 rounded-full border border-white/10 object-cover sm:h-24 sm:w-24"
-            src={Headshot}
+            src={me}
             alt="Jason Zhao"
           />
 
