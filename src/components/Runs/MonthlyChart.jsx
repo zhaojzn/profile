@@ -7,33 +7,65 @@ export default function MonthlyChart({ runs }) {
   const months = useMemo(() => buildMonths(runs, 12), [runs])
   const [hovered, setHovered] = useState(null)
 
-  const maxKm = Math.max(1, ...months.map(m => m.km))
-  const W = 720, H = 200
-  const padT = 12, padB = 26, padX = 4
+  const maxKm = Math.max(1, ...months.map((m) => m.km))
+  const W = 720,
+    H = 200
+  const padT = 12,
+    padB = 26,
+    padX = 4
   const innerH = H - padT - padB
   const slot = (W - padX * 2) / months.length
   const barW = Math.min(40, slot * 0.6)
 
   return (
     <div className="relative w-full">
-      <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto w-full">
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        className="block h-auto w-full"
+        aria-label="Monthly running distance"
+      >
         {months.map((m, i) => {
           const h = (m.km / maxKm) * innerH
           const x = padX + slot * i + (slot - barW) / 2
           const y = padT + (innerH - h)
           const active = hovered === i
           return (
-            <g key={m.key}
+            <g
+              key={m.key}
+              tabIndex={0}
+              role="img"
+              aria-label={`${m.label}: ${m.km.toFixed(1)} km, ${m.count} runs`}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
-              style={{ cursor: 'default' }}>
+              onFocus={() => setHovered(i)}
+              onBlur={() => setHovered(null)}
+              onClick={() => setHovered(i)}
+              style={{ cursor: 'default' }}
+            >
               {/* full-height hover target */}
-              <rect x={padX + slot * i} y={padT} width={slot} height={innerH} fill="transparent" />
               <rect
-                x={x} y={y} width={barW} height={Math.max(h, m.km > 0 ? 2 : 0)} rx={3}
-                fill={RUN_ACCENT} opacity={active ? 1 : m.km > 0 ? 0.78 : 0.18}
+                x={padX + slot * i}
+                y={padT}
+                width={slot}
+                height={innerH}
+                fill="transparent"
               />
-              <text x={padX + slot * i + slot / 2} y={H - 9} textAnchor="middle" fontSize="10" fill="#71717a">
+              <rect
+                x={x}
+                y={y}
+                width={barW}
+                height={Math.max(h, m.km > 0 ? 2 : 0)}
+                rx={3}
+                fill={`var(--run-accent, ${RUN_ACCENT})`}
+                opacity={active ? 1 : m.km > 0 ? 0.78 : 0.18}
+              />
+              <text
+                x={padX + slot * i + slot / 2}
+                y={H - 9}
+                textAnchor="middle"
+                fontSize="10"
+                fill="var(--run-muted, #71717a)"
+              >
                 {m.label}
               </text>
             </g>
@@ -42,11 +74,20 @@ export default function MonthlyChart({ runs }) {
       </svg>
       {hovered !== null && (
         <div
-          className="pointer-events-none absolute -translate-x-1/2 -translate-y-full rounded-lg border border-white/10 bg-neutral-900/95 px-2.5 py-1.5 text-xs shadow-xl"
-          style={{ left: `${((padX + slot * hovered + slot / 2) / W) * 100}%`, top: padT }}
+          className="run-tooltip pointer-events-none absolute -translate-x-1/2 -translate-y-full px-2.5 py-1.5 text-xs"
+          style={{
+            left: `clamp(45px, ${
+              ((padX + slot * hovered + slot / 2) / W) * 100
+            }%, calc(100% - 45px))`,
+            top: padT,
+          }}
         >
-          <div className="font-medium text-white">{months[hovered].km.toFixed(1)} km</div>
-          <div className="text-zinc-400">{months[hovered].count} run{months[hovered].count === 1 ? '' : 's'}</div>
+          <div className="run-tooltip-title">
+            {months[hovered].km.toFixed(1)} km
+          </div>
+          <div className="run-tooltip-sub">
+            {months[hovered].count} run{months[hovered].count === 1 ? '' : 's'}
+          </div>
         </div>
       )}
     </div>
@@ -58,7 +99,10 @@ function buildMonths(runs, n) {
   const buckets = new Map()
   for (const r of runs) {
     const d = new Date(r.startTime)
-    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(
+      2,
+      '0'
+    )}`
     const cur = buckets.get(key) || { km: 0, count: 0 }
     cur.km += (r.distanceMeters || 0) / 1000
     cur.count += 1
@@ -68,13 +112,16 @@ function buildMonths(runs, n) {
   // meaningful even if the latest run was a while ago.
   const latest = runs.reduce(
     (max, r) => (r.startTime > max ? r.startTime : max),
-    runs[0]?.startTime || new Date().toISOString(),
+    runs[0]?.startTime || new Date().toISOString()
   )
   const end = new Date(latest)
   const out = []
   for (let i = n - 1; i >= 0; i--) {
     const d = new Date(end.getFullYear(), end.getMonth() - i, 1)
-    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(
+      2,
+      '0'
+    )}`
     const b = buckets.get(key) || { km: 0, count: 0 }
     out.push({
       key,

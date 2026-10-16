@@ -3,6 +3,10 @@
 export const API_BASE_URL =
   "https://ck9gox2le1.execute-api.us-west-1.amazonaws.com";
 
+// The API does not allow localhost origins. Vite proxies local previews;
+// deployed builds continue to use the same public endpoint directly.
+const REQUEST_BASE_URL = import.meta.env.DEV ? "" : API_BASE_URL;
+
 // Accent used across the run pages + gallery to tie the running theme together.
 export const RUN_ACCENT = "#fc5200"; // Strava orange
 
@@ -22,14 +26,14 @@ export const GENRE_COLORS = [
 ];
 
 export async function fetchRuns() {
-  const res = await fetch(`${API_BASE_URL}/api/runs`);
+  const res = await fetch(`${REQUEST_BASE_URL}/api/runs`);
   if (!res.ok) throw new Error(`API ${res.status}`);
   const data = await res.json();
   return Array.isArray(data.items) ? data.items : [];
 }
 
 export async function fetchRun(id) {
-  const res = await fetch(`${API_BASE_URL}/api/runs/${id}`);
+  const res = await fetch(`${REQUEST_BASE_URL}/api/runs/${id}`);
   if (res.status === 404) throw new Error("Run not found.");
   if (!res.ok) throw new Error(`API ${res.status}`);
   return res.json();

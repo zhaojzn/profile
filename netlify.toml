@@ -2,6 +2,15 @@
   # Vite 8 needs Node 20.19+/22.12+; Netlify defaults to 18 without this.
   NODE_VERSION = "22"
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/now-playing"
+  to = "/.netlify/functions/now-playing"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

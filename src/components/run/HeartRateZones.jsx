@@ -5,11 +5,11 @@ import { useMemo } from 'react'
 const DEFAULT_MAX_HR = 200
 
 const ZONES = [
-  { name: 'Recovery',   tag: 'Z1', lo: 0.00, color: '#60a5fa' },
-  { name: 'Aerobic',    tag: 'Z2', lo: 0.60, color: '#34d399' },
-  { name: 'Tempo',      tag: 'Z3', lo: 0.70, color: '#facc15' },
-  { name: 'Threshold',  tag: 'Z4', lo: 0.80, color: '#fb923c' },
-  { name: 'Anaerobic',  tag: 'Z5', lo: 0.90, color: '#ef4444' },
+  { name: 'Recovery', tag: 'Z1', lo: 0.0, color: '#60a5fa' },
+  { name: 'Aerobic', tag: 'Z2', lo: 0.6, color: '#34d399' },
+  { name: 'Tempo', tag: 'Z3', lo: 0.7, color: '#facc15' },
+  { name: 'Threshold', tag: 'Z4', lo: 0.8, color: '#fb923c' },
+  { name: 'Anaerobic', tag: 'Z5', lo: 0.9, color: '#ef4444' },
 ]
 
 export default function HeartRateZones({ streams }) {
@@ -19,38 +19,62 @@ export default function HeartRateZones({ streams }) {
 
   return (
     <div>
-      <div className="mb-5 flex flex-wrap gap-x-8 gap-y-2">
+      <div className="run-hr-summary">
         <HeadStat label="Avg HR" value={`${avgHr} bpm`} />
         <HeadStat label="Max HR" value={`${maxHr} bpm`} />
       </div>
 
       {/* distribution bar */}
-      <div className="mb-6 flex h-2.5 overflow-hidden rounded-full bg-white/5">
-        {zones.map(z => z.sec > 0 && (
-          <span key={z.tag} style={{ width: `${(z.sec / totalSec) * 100}%`, background: z.color }} />
-        ))}
+      <div className="run-hr-distribution mb-6 flex overflow-hidden">
+        {zones.map(
+          (z) =>
+            z.sec > 0 && (
+              <span
+                key={z.tag}
+                style={{
+                  width: `${(z.sec / totalSec) * 100}%`,
+                  background: z.color,
+                }}
+              />
+            )
+        )}
       </div>
 
       {/* per-zone rows */}
       <div className="flex flex-col gap-2.5">
-        {zones.slice().reverse().map(z => {
-          const pct = (z.sec / totalSec) * 100
-          return (
-            <div key={z.tag} className="flex items-center gap-3">
-              <span className="inline-block h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: z.color }} />
-              <div className="flex w-32 shrink-0 items-baseline gap-1.5">
-                <span className="text-sm font-medium text-zinc-200">{z.tag}</span>
-                <span className="text-xs text-zinc-500">{z.name}</span>
+        {zones
+          .slice()
+          .reverse()
+          .map((z) => {
+            const pct = (z.sec / totalSec) * 100
+            return (
+              <div key={z.tag} className="run-hr-row">
+                <span
+                  className="inline-block h-2.5 w-2.5 shrink-0 rounded-sm"
+                  style={{ background: z.color }}
+                />
+                <div className="flex items-baseline gap-1.5">
+                  <span className="run-hr-tag text-sm">{z.tag}</span>
+                  <span className="run-hr-name text-xs">{z.name}</span>
+                </div>
+                <span className="run-hr-range text-xs tabular-nums">
+                  {z.range}
+                </span>
+                <div className="run-hr-track h-1.5 overflow-hidden">
+                  <div
+                    className="h-full"
+                    style={{ width: `${pct}%`, background: z.color }}
+                  />
+                </div>
+                <span className="run-hr-time text-right text-xs tabular-nums">
+                  {fmtMS(z.sec)}
+                </span>
+                <span className="run-hr-percent text-right text-xs tabular-nums">
+                  {Math.round(pct)}%
+                </span>
               </div>
-              <span className="hidden w-20 shrink-0 text-xs tabular-nums text-zinc-500 sm:block">{z.range}</span>
-              <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/5">
-                <div className="h-full rounded-full" style={{ width: `${pct}%`, background: z.color }} />
-              </div>
-              <span className="w-14 shrink-0 text-right text-xs tabular-nums text-zinc-300">{fmtMS(z.sec)}</span>
-              <span className="w-10 shrink-0 text-right text-xs tabular-nums text-zinc-500">{Math.round(pct)}%</span>
-            </div>
-          )
-        })}
+            )
+          })}
       </div>
     </div>
   )
@@ -73,13 +97,14 @@ function compute(streams) {
     sec: 0,
   }))
 
-  let totalSec = 0, weighted = 0
+  let totalSec = 0,
+    weighted = 0
   for (let i = 1; i < n; i++) {
     let dt = time[i] - time[i - 1]
     if (dt <= 0) continue
     if (dt > 30) dt = 30 // clamp pauses so a long stop doesn't skew a zone
     const bpm = hr[i]
-    const z = bounds.find(b => bpm >= b.floor && bpm < b.ceil) ?? bounds[0]
+    const z = bounds.find((b) => bpm >= b.floor && bpm < b.ceil) ?? bounds[0]
     z.sec += dt
     totalSec += dt
     weighted += bpm * dt
@@ -100,8 +125,8 @@ function compute(streams) {
 function HeadStat({ label, value }) {
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-wider text-zinc-500">{label}</div>
-      <div className="mt-0.5 text-lg font-semibold tabular-nums text-white">{value}</div>
+      <div className="run-label">{label}</div>
+      <div className="run-hr-value">{value}</div>
     </div>
   )
 }

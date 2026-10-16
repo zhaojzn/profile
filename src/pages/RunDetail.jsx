@@ -1,9 +1,17 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { fetchRun, fmtDate, fmtDuration, fmtKm, fmtPace, fmtClock } from '../lib/runs'
+import {
+  fetchRun,
+  fmtDate,
+  fmtDuration,
+  fmtKm,
+  fmtPace,
+  fmtClock,
+} from '../lib/runs'
 import PieChart from '../components/run/PieChart'
 import PaceChart from '../components/run/PaceChart'
 import HeartRateZones from '../components/run/HeartRateZones'
+import RunShell from '../components/Runs/RunShell'
 
 export default function RunDetail() {
   const { id } = useParams()
@@ -15,34 +23,38 @@ export default function RunDetail() {
     setRun(null)
     setError(null)
     fetchRun(id)
-      .then(d => { if (!cancelled) setRun(d) })
-      .catch(e => { if (!cancelled) setError(e.message) })
-    return () => { cancelled = true }
+      .then((d) => {
+        if (!cancelled) setRun(d)
+      })
+      .catch((e) => {
+        if (!cancelled) setError(e.message)
+      })
+    return () => {
+      cancelled = true
+    }
   }, [id])
 
   if (error) {
     return (
-      <Shell>
-        <div className="flex flex-1 items-center justify-center px-6 py-24">
-          <div className="max-w-md rounded-xl border border-white/10 bg-white/[0.02] p-8 text-center">
-            <h2 className="mb-2 text-lg font-semibold text-white">{error}</h2>
-            <p className="mb-4 text-sm text-zinc-400">
-              This run might be private, deleted, or never processed.
-            </p>
-            <Link to="/" className="text-sm text-zinc-300 underline-offset-4 hover:text-white hover:underline">
-              ← Back home
-            </Link>
+      <RunShell detail>
+        <main className="run-message">
+          <div>
+            <h1>{error}</h1>
+            <p>This run might be private, deleted, or never processed.</p>
+            <Link to="/runs">← All runs</Link>
           </div>
-        </div>
-      </Shell>
+        </main>
+      </RunShell>
     )
   }
 
   if (!run) {
     return (
-      <Shell>
-        <div className="flex flex-1 items-center justify-center py-24 text-sm text-zinc-500">Loading…</div>
-      </Shell>
+      <RunShell detail>
+        <main className="run-message" role="status">
+          Loading run…
+        </main>
+      </RunShell>
     )
   }
 
@@ -50,19 +62,21 @@ export default function RunDetail() {
   const hasHr = hasStreams && run.streams.heartrate?.length > 1
 
   return (
-    <Shell>
-      <main className="mx-auto w-full max-w-3xl flex-1 px-6 pb-20 pt-10 sm:pt-14">
-        <header className="mb-10">
-          <div className="mb-3 font-mono text-xs uppercase tracking-wider text-zinc-500">
-            {fmtDate(run.startTime)}{run.musicSource && ` · music via ${run.musicSource}`}
+    <RunShell detail>
+      <main className="run-detail">
+        <header className="run-detail-intro">
+          <div className="run-label run-detail-date">
+            {fmtDate(run.startTime)}
+            {run.musicSource && ` · music via ${run.musicSource}`}
           </div>
-          <h1 className="mb-6 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            {run.name || 'Run'}
-          </h1>
-          <div className="flex flex-wrap gap-x-10 gap-y-4">
+          <h1>{run.name || 'Run'}</h1>
+          <div className="run-totals run-detail-totals">
             <Stat label="Distance" value={fmtKm(run.distanceMeters || 0)} />
             <Stat label="Time" value={fmtDuration(run.elapsedSeconds || 0)} />
-            <Stat label="Avg pace" value={fmtPace(run.distanceMeters, run.elapsedSeconds)} />
+            <Stat
+              label="Avg pace"
+              value={fmtPace(run.distanceMeters, run.elapsedSeconds)}
+            />
             <Stat label="Tracks" value={String(run.tracks.length)} />
           </div>
         </header>
@@ -70,8 +84,9 @@ export default function RunDetail() {
         {hasHr ? (
           <Section title="Heart rate zones">
             <HeartRateZones streams={run.streams} />
-            <p className="mt-4 text-xs text-zinc-500">
-              Time spent in each zone, as a share of moving time. Zones are % of max HR.
+            <p className="run-chart-note">
+              Time spent in each zone, as a share of moving time. Zones are % of
+              max HR.
             </p>
           </Section>
         ) : hasStreams ? (
@@ -82,100 +97,85 @@ export default function RunDetail() {
               streams={run.streams}
               tracks={run.tracks}
             />
-            <p className="mt-3 text-xs text-zinc-500">
-              Faster pace is higher. Hover a dot to see which track started playing at that moment.
+            <p className="run-chart-note">
+              Faster pace is higher. Hover a dot to see which track started
+              playing at that moment.
             </p>
           </Section>
         ) : null}
 
         {run.genreBreakdown.length > 0 && (
           <Section title="Genre mix">
-            <PieChart data={run.genreBreakdown.map(g => ({ label: g.genre, value: g.percent }))} />
+            <PieChart
+              data={run.genreBreakdown.map((g) => ({
+                label: g.genre,
+                value: g.percent,
+              }))}
+            />
           </Section>
         )}
 
-        <section className="mb-4">
-          <h2 className="mb-3 text-sm font-semibold text-white">Tracks played</h2>
+        <section className="run-detail-section">
+          <h2 className="run-section-heading">Tracks played</h2>
           {run.tracks.length === 0 ? (
-            <div className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-6 text-sm text-zinc-400">
+            <div className="run-empty-tracks">
               No tracks were recorded for this run.
             </div>
           ) : (
-            <div className="overflow-hidden rounded-xl border border-white/10">
+            <div className="run-track-list">
               {run.tracks
                 .slice()
                 .sort((a, b) => (a.playedAt < b.playedAt ? -1 : 1))
                 .map((t, i) => (
-                  <div
-                    key={`${t.trackId}-${i}`}
-                    className="flex items-center gap-3.5 border-t border-white/10 bg-white/[0.02] px-4 py-3 first:border-t-0"
-                  >
+                  <div key={`${t.trackId}-${i}`} className="run-track">
                     <TrackArt url={t.imageUrl} />
-                    <div className="min-w-0 flex-1">
-                      <div className="truncate text-sm font-medium text-white">{t.trackName}</div>
-                      <div className="truncate text-xs text-zinc-400">{t.artistNames.join(', ')}</div>
+                    <div className="run-track-info">
+                      <div className="run-track-name">{t.trackName}</div>
+                      <div className="run-track-artist">
+                        {t.artistNames.join(', ')}
+                      </div>
                     </div>
-                    <div className="shrink-0 tabular-nums text-xs text-zinc-500">{fmtClock(t.playedAt)}</div>
+                    <div className="run-track-time">{fmtClock(t.playedAt)}</div>
                   </div>
                 ))}
             </div>
           )}
         </section>
 
-        <footer className="mt-12 flex flex-col gap-3 border-t border-white/5 pt-6 text-xs text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
-          <Link to="/runs" className="text-zinc-400 transition hover:text-white">
-            ← All runs
-          </Link>
-          <div className="flex items-center gap-4">
+        <footer className="run-detail-footer">
+          <Link to="/runs">← All runs</Link>
+          <div>
             <a
               href={`https://www.strava.com/activities/${run.activityId}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold"
+              className="run-strava-link"
               style={{ color: '#FC5200' }}
             >
               View on Strava
             </a>
-            <img src="/powered-by-strava.svg" alt="Powered by Strava" className="h-5 w-auto opacity-70" />
+            <img src="/powered-by-strava.svg" alt="Powered by Strava" />
           </div>
         </footer>
       </main>
-    </Shell>
-  )
-}
-
-function Shell({ children }) {
-  return (
-    <div className="flex min-h-screen flex-col bg-bg text-white antialiased">
-      <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-bg/90 backdrop-blur-sm">
-        <div className="mx-auto flex w-full max-w-3xl items-center justify-between px-5 py-4 sm:px-6 sm:py-5">
-          <Link to="/" className="text-[15px] font-semibold tracking-tight text-white">
-            jason zhao
-          </Link>
-          <Link to="/runs" className="text-sm text-zinc-400 transition-colors hover:text-white">
-            Runs
-          </Link>
-        </div>
-      </header>
-      {children}
-    </div>
+    </RunShell>
   )
 }
 
 function Section({ title, children }) {
   return (
-    <section className="mb-10">
-      <h2 className="mb-4 text-sm font-semibold text-white">{title}</h2>
-      <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 sm:p-6">{children}</div>
+    <section className="run-detail-section">
+      <h2 className="run-section-heading">{title}</h2>
+      <div className="run-detail-panel">{children}</div>
     </section>
   )
 }
 
 function Stat({ label, value }) {
   return (
-    <div>
-      <div className="mb-1 font-mono text-[11px] uppercase tracking-wider text-zinc-500">{label}</div>
-      <div className="text-lg font-medium tabular-nums text-white">{value}</div>
+    <div className="run-total">
+      <div className="run-label">{label}</div>
+      <div className="run-total-value">{value}</div>
     </div>
   )
 }
@@ -187,15 +187,27 @@ function TrackArt({ url }) {
         src={url}
         alt=""
         loading="lazy"
-        className="h-10 w-10 shrink-0 rounded-sm bg-neutral-800 object-cover"
-        onError={(e) => { e.currentTarget.style.display = 'none' }}
+        className="run-track-art"
+        onError={(e) => {
+          e.currentTarget.style.display = 'none'
+        }}
       />
     )
   }
   return (
-    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-white/10 bg-neutral-800">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fc5200" strokeWidth="2" className="h-4 w-4" aria-hidden="true">
-        <path d="M9 18V5l12-2v13" strokeLinecap="round" strokeLinejoin="round" />
+    <div className="run-track-art run-track-art-empty">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        aria-hidden="true"
+      >
+        <path
+          d="M9 18V5l12-2v13"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
         <circle cx="6" cy="18" r="3" />
         <circle cx="18" cy="16" r="3" />
       </svg>

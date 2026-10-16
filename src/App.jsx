@@ -5,7 +5,7 @@ import * as ReactGA4 from "react-ga4";
 // react-ga4 ships CommonJS; its default export resolves differently under
 // Vite's dev server (esbuild) vs the production build (Rollup). Resolve it
 // defensively so `.initialize` exists in both.
-const ReactGA = ReactGA4.default ?? ReactGA4;
+const ReactGA = ReactGA4.default?.default ?? ReactGA4.default ?? ReactGA4;
 
 function App() {
   // Analytics is non-critical — run it after mount and never let a failure

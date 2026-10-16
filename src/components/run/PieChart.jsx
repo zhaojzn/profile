@@ -26,38 +26,53 @@ export default function PieChart({ data }) {
     color: GENRE_COLORS[i % GENRE_COLORS.length],
   }))
 
-  const cx = 110, cy = 110, r = 100
+  const cx = 110,
+    cy = 110,
+    r = 100
   let cursor = 0
   const paths = slices.map((s) => {
     const angle = (s.value / total) * Math.PI * 2
     // Epsilon so a single 100% slice still draws as a full circle.
-    const path = data.length === 1
-      ? `M ${cx} ${cy - r} A ${r} ${r} 0 1 1 ${cx - 0.01} ${cy - r} Z`
-      : arcPath(cx, cy, r, cursor, cursor + angle)
+    const path =
+      data.length === 1
+        ? `M ${cx} ${cy - r} A ${r} ${r} 0 1 1 ${cx - 0.01} ${cy - r} Z`
+        : arcPath(cx, cy, r, cursor, cursor + angle)
     cursor += angle
     return { ...s, path }
   })
 
   return (
     <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
-      <svg viewBox="0 0 220 220" className="h-[200px] w-[200px] shrink-0 sm:h-[220px] sm:w-[220px]">
+      <svg
+        viewBox="0 0 220 220"
+        className="h-[200px] w-[200px] shrink-0 sm:h-[220px] sm:w-[220px]"
+      >
         {paths.map((p, i) => (
-          <path key={i} d={p.path} fill={p.color} stroke="#121212" strokeWidth={1.5} />
+          <path
+            key={i}
+            d={p.path}
+            fill={p.color}
+            stroke="var(--run-paper, #121212)"
+            strokeWidth={1.5}
+          />
         ))}
       </svg>
-      <ul className="w-full flex-1">
+      <ul className="run-pie-legend w-full flex-1">
         {slices.map((s, i) => {
           const pct = Math.round((s.value / total) * 100)
           return (
             <li
               key={i}
-              className="flex items-center justify-between border-b border-white/10 py-2 text-sm last:border-b-0"
+              className="flex items-center justify-between border-b py-2 text-xs last:border-b-0"
             >
               <span className="flex items-center gap-2.5">
-                <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ background: s.color }} />
-                <span className="text-zinc-200">{s.label}</span>
+                <span
+                  className="inline-block h-2.5 w-2.5 rounded-sm"
+                  style={{ background: s.color }}
+                />
+                <span className="run-pie-name">{s.label}</span>
               </span>
-              <span className="tabular-nums text-zinc-400">{pct}%</span>
+              <span className="run-pie-value tabular-nums">{pct}%</span>
             </li>
           )
         })}
