@@ -1,0 +1,7 @@
+.link-arrow {
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  vertical-align: -0.08em;
+  flex-shrink: 0;
+}

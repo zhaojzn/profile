@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import LinkArrow from './LinkArrow'
 
 const REFRESH_MS = 30_000
 
@@ -83,7 +84,7 @@ export function ListeningLine({ status }) {
         aria-label={`Find ${track.title} by ${track.artist} on Spotify`}
         title="Find on Spotify"
       >
-        Spotify <span aria-hidden="true">↗</span>
+        Spotify <LinkArrow />
       </a>
     </section>
   )

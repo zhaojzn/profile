@@ -4,6 +4,7 @@ import { fetchRuns, fmtDate, fmtKm, fmtPace } from '../lib/runs'
 import resume from '../assets/jason_resume.pdf'
 import RunningShoe from '../components/RunningShoe'
 import ListeningStatus from '../components/ListeningStatus'
+import LinkArrow from '../components/LinkArrow'
 import './home.css'
 
 const projects = [
@@ -67,7 +68,7 @@ export default function Home() {
           <span className="personal-location">Developer in Vancouver</span>
         </div>
         <a href={resume} target="_blank" rel="noreferrer">
-          Résumé ↗
+          Résumé <LinkArrow />
         </a>
       </header>
 
@@ -87,7 +88,7 @@ export default function Home() {
               <dt>
                 <a href={project.href} target="_blank" rel="noreferrer">
                   {project.name}
-                  <span aria-hidden="true"> ↗</span>
+                  <LinkArrow />
                 </a>
               </dt>
               <dd>

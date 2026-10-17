@@ -12,6 +12,7 @@ import PieChart from '../components/run/PieChart'
 import PaceChart from '../components/run/PaceChart'
 import HeartRateZones from '../components/run/HeartRateZones'
 import RunShell from '../components/Runs/RunShell'
+import LinkArrow from '../components/LinkArrow'
 
 export default function RunDetail() {
   const { id } = useParams()
@@ -41,7 +42,9 @@ export default function RunDetail() {
           <div>
             <h1>{error}</h1>
             <p>This run might be private, deleted, or never processed.</p>
-            <Link to="/runs">← All runs</Link>
+            <Link to="/runs">
+              <LinkArrow direction="left" /> All runs
+            </Link>
           </div>
         </main>
       </RunShell>
@@ -143,7 +146,9 @@ export default function RunDetail() {
         </section>
 
         <footer className="run-detail-footer">
-          <Link to="/runs">← All runs</Link>
+          <Link to="/runs">
+            <LinkArrow direction="left" /> All runs
+          </Link>
           <div>
             <a
               href={`https://www.strava.com/activities/${run.activityId}`}

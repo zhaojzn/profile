@@ -1,5 +1,6 @@
 import { useLayoutEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import LinkArrow from '../LinkArrow'
 import '../../pages/running.css'
 
 export default function RunShell({ children, detail = false }) {
@@ -15,7 +16,7 @@ export default function RunShell({ children, detail = false }) {
           Jason Zhao
         </Link>
         <Link className="run-back" to={detail ? '/runs' : '/'}>
-          ← {detail ? 'Running log' : 'Back home'}
+          <LinkArrow direction="left" /> {detail ? 'Running log' : 'Back home'}
         </Link>
       </header>
       {children}
