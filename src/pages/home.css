@@ -24,18 +24,6 @@ body:has(.personal-page) {
   gap: 24px;
 }
 
-.personal-name {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.personal-location {
-  color: #8c8980;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-}
-
 .running-shoe {
   position: relative;
   width: 152px;
@@ -119,6 +107,13 @@ body:has(.personal-page) {
   font-size: 29px;
   letter-spacing: -0.5px;
   line-height: 1.45;
+}
+
+.personal-intro .personal-intro-note {
+  margin-top: 12px;
+  color: #79766d;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .personal-running-note > p:first-child {

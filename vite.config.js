@@ -9,6 +9,8 @@ export default defineConfig(({ mode }) => {
     getConfig: () => ({
       username: env.LASTFM_USERNAME,
       apiKey: env.LASTFM_API_KEY,
+      spotifyClientId: env.SPOTIFY_CLIENT_ID,
+      spotifyClientSecret: env.SPOTIFY_CLIENT_SECRET,
     }),
   })
   return {

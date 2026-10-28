@@ -63,20 +63,16 @@ export default function Home() {
   return (
     <main className="personal-page" id="hello">
       <header className="personal-header">
-        <div className="personal-name">
-          <h1>Jason Zhao</h1>
-          <span className="personal-location">Developer in Vancouver</span>
-        </div>
+        <h1>Jason Zhao</h1>
         <a href={resume} target="_blank" rel="noreferrer">
           Résumé <LinkArrow />
         </a>
       </header>
 
       <section className="personal-intro" aria-label="About Jason" id="about">
-        <p className="personal-lead">
-          Building things.
-          <br />
-          Getting my miles in.
+        <p className="personal-lead">Building things.</p>
+        <p className="personal-intro-note">
+          Software Developer @ Jostle
         </p>
       </section>
 

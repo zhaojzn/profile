@@ -1,3 +1,5 @@
+import { createSpotifyArtworkResolver } from './spotify-artwork.mjs'
+
 const CACHE_MS = 25_000
 const UPSTREAM_TIMEOUT_MS = 6_000
 
@@ -44,7 +46,9 @@ export function normalizeTrack(track) {
       typeof track.album === 'string'
         ? track.album
         : track.album?.['#text'] || '',
-    imageUrl: safeUrl(image?.['#text']),
+    imageUrl: image?.['#text']?.includes('2a96cbd8b46e442fc41c2b86b821562f')
+      ? null
+      : safeUrl(image?.['#text']),
     url: safeUrl(track.url),
     spotifyUrl: `https://open.spotify.com/search/${encodeURIComponent(
       `${track.name} ${artist}`.trim()
@@ -66,6 +70,7 @@ export function createListeningHandler({
 }) {
   let cached = null
   let pending = null
+  const resolveArtwork = createSpotifyArtworkResolver({ fetcher, now })
 
   return async function listening(method = 'GET') {
     if (method !== 'GET') {
@@ -74,11 +79,17 @@ export function createListeningHandler({
       return response
     }
 
-    const { username, apiKey } = getConfig()
+    const config = getConfig()
+    const { username, apiKey } = config
     if (!username?.trim() || !apiKey?.trim()) {
       return json({ configured: false, track: null })
     }
-    const identity = `${username.trim()}:${apiKey.trim()}`
+    const identity = JSON.stringify([
+      username.trim(),
+      apiKey.trim(),
+      config.spotifyClientId?.trim(),
+      config.spotifyClientSecret?.trim(),
+    ])
     if (cached?.identity === identity && cached.until > now()) {
       return json(cached.body, 200, true)
     }
@@ -104,12 +115,20 @@ export function createListeningHandler({
         if (data.error || !data.recenttracks)
           throw new Error('Last.fm unavailable')
         const items = data.recenttracks.track
+        const track = normalizeTrack(Array.isArray(items) ? items[0] : items)
+        const spotify = await resolveArtwork(track, config)
+        if (spotify) {
+          track.fallbackImageUrl = track.imageUrl
+          track.imageUrl = spotify.imageUrl
+          track.spotifyUrl = spotify.spotifyUrl
+          track.artworkSource = 'spotify'
+        }
         const body = {
           configured: true,
           profileUrl: `https://www.last.fm/user/${encodeURIComponent(
             username.trim()
           )}`,
-          track: normalizeTrack(Array.isArray(items) ? items[0] : items),
+          track,
         }
         cached = { identity, until: now() + CACHE_MS, body }
         return body

@@ -4,6 +4,8 @@ const listening = createListeningHandler({
   getConfig: () => ({
     username: process.env.LASTFM_USERNAME,
     apiKey: process.env.LASTFM_API_KEY,
+    spotifyClientId: process.env.SPOTIFY_CLIENT_ID,
+    spotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET,
   }),
 })
 

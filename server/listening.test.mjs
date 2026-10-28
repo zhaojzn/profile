@@ -132,3 +132,98 @@ test('Last.fm JSON errors and unexpected methods fail safely', async () => {
   assert.equal(denied.status, 405)
   assert.equal(denied.headers.get('Allow'), 'GET')
 })
+
+test('Last.fm placeholder artwork uses the local fallback instead', () => {
+  const normalized = normalizeTrack({
+    ...track,
+    image: [
+      {
+        size: 'large',
+        '#text':
+          'https://lastfm.freetls.fastly.net/i/u/174s/2a96cbd8b46e442fc41c2b86b821562f.png',
+      },
+    ],
+  })
+  assert.equal(normalized.imageUrl, null)
+})
+
+test('Spotify artwork enriches the song without changing Last.fm listening status', async () => {
+  let clock = 0
+  let searches = 0
+  const spotifyConfig = {
+    ...config(),
+    spotifyClientId: 'test-id',
+    spotifyClientSecret: 'test-secret',
+  }
+  const handler = createListeningHandler({
+    getConfig: () => spotifyConfig,
+    now: () => clock,
+    fetcher: async (url) => {
+      if (url.includes('audioscrobbler')) {
+        return upstream([
+          {
+            ...track,
+            '@attr': { nowplaying: clock ? 'false' : 'true' },
+            date: { uts: '1700000000' },
+          },
+        ])
+      }
+      if (url.includes('/api/token'))
+        return Response.json({ access_token: 'test-token', expires_in: 3600 })
+      searches++
+      return Response.json({
+        tracks: {
+          items: [
+            {
+              id: '0123456789abcdefghijkl',
+              name: track.name,
+              artists: [{ name: track.artist['#text'] }],
+              album: {
+                name: 'An album',
+                images: [
+                  { width: 300, url: 'https://i.scdn.co/image/example' },
+                ],
+              },
+            },
+          ],
+        },
+      })
+    },
+  })
+  const body = await (await handler()).json()
+  assert.equal(body.track.isPlaying, true)
+  assert.equal(body.track.imageUrl, 'https://i.scdn.co/image/example')
+  assert.equal(body.track.fallbackImageUrl, track.image[0]['#text'])
+  assert.equal(body.track.artworkSource, 'spotify')
+  assert.equal(
+    body.track.spotifyUrl,
+    'https://open.spotify.com/track/0123456789abcdefghijkl'
+  )
+  for (const secret of ['test-secret', 'test-token', config().apiKey])
+    assert.equal(JSON.stringify(body).includes(secret), false)
+  clock = 26_000
+  const stopped = await (await handler()).json()
+  assert.equal(stopped.track.isPlaying, false)
+  assert.equal(stopped.track.playedAt, '2023-11-14T22:13:20.000Z')
+  assert.equal(searches, 1)
+})
+
+test('Spotify failures never hide Last.fm song/status or existing artwork', async () => {
+  const handler = createListeningHandler({
+    getConfig: () => ({
+      ...config(),
+      spotifyClientId: 'test-id',
+      spotifyClientSecret: 'test-secret',
+    }),
+    fetcher: async (url) => {
+      if (url.includes('audioscrobbler')) return upstream([track])
+      throw new Error('Spotify unavailable')
+    },
+  })
+  const response = await handler()
+  const body = await response.json()
+  assert.equal(response.status, 200)
+  assert.equal(body.track.title, track.name)
+  assert.equal(body.track.isPlaying, true)
+  assert.equal(body.track.imageUrl, track.image[0]['#text'])
+})

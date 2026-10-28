@@ -19,11 +19,22 @@ export function ListeningLine({ status }) {
   if (!track) return null
   const ago =
     !track.isPlaying && track.playedAt ? timeAgo(track.playedAt) : null
+  const trackUrl =
+    track.artworkSource === 'spotify'
+      ? track.spotifyUrl
+      : track.url || track.spotifyUrl
 
   return (
     <section className="personal-listening" aria-label="What I’m listening to">
-      <div className="listening-art" aria-hidden="true">
+      <a
+        className="listening-art"
+        href={trackUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`Open ${track.title} by ${track.artist}`}
+      >
         <svg
+          aria-hidden="true"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -42,11 +53,19 @@ export function ListeningLine({ status }) {
             height="36"
             loading="lazy"
             onError={(event) => {
-              event.currentTarget.style.display = 'none'
+              const image = event.currentTarget
+              if (
+                track.fallbackImageUrl &&
+                image.src !== track.fallbackImageUrl
+              ) {
+                image.src = track.fallbackImageUrl
+              } else {
+                image.style.display = 'none'
+              }
             }}
           />
         )}
-      </div>
+      </a>
       <div className="listening-copy">
         <div className="listening-meta">
           <span className={track.isPlaying ? 'listening-live' : ''}>
@@ -67,7 +86,7 @@ export function ListeningLine({ status }) {
         </div>
         <a
           className="listening-track"
-          href={track.url || track.spotifyUrl}
+          href={trackUrl}
           target="_blank"
           rel="noreferrer"
           title={`${track.title} — ${track.artist}`}
@@ -103,7 +122,7 @@ export default function ListeningStatus() {
       controller?.abort()
       const request = new AbortController()
       controller = request
-      const deadline = setTimeout(() => request.abort(), 8_000)
+      const deadline = setTimeout(() => request.abort(), 10_000)
       try {
         const response = await fetch('/api/now-playing', {
           signal: request.signal,
